@@ -2,6 +2,13 @@ defmodule Portal do
   defstruct [:left, :right]
 
   @doc """
+  Shoots a new door with the givel `color`.
+  """
+  def shoot(color) do
+    DynamicSupervisor.start_child(Portal.DoorSupervisor, {Portal.Door, color})
+  end
+
+  @doc """
   Starts tranfering `data` from `left` to `right`.
   """
   def transfer(left, right, data) do
